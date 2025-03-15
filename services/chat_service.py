@@ -1,24 +1,27 @@
 import os
+from pyexpat.errors import messages
+
 import google.generativeai as genai
+import constants
 from chat.prompts import get_system_prompt
 
 class ChatService:
     def __init__(self):
-        self.api_key = os.getenv("GEMINI_DEV_API_KEY")
-        self.messages = []
-        if not self.api_key:
+        self.messages, self.chat_session = self.setup()
+
+
+    def setup(self):
+        api_key = os.getenv(constants.GEMINI_API_KEY_NAME)
+        if not api_key:
             print("Gemini API key not found!")
             exit(1)
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel(constants.GEMINI_MODEL)
+        messages = [{"role": "user", "parts": [get_system_prompt()]}]
+        chat_session = model.start_chat(history=messages)
 
-        genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel("gemini-2.0-flash")
-        self.messages = [
-            {"role": "user", "parts": [self.get_system_prompt()]}
-        ]
-        self.chat_session = self.model.start_chat(history=self.messages)
+        return messages, chat_session
 
-    def get_system_prompt(self):
-        return get_system_prompt()
 
     def chat(self, message):
         try:
@@ -26,3 +29,6 @@ class ChatService:
             return response.text
         except Exception as e:
             print(e)
+
+
+

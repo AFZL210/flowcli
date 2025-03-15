@@ -1,19 +1,12 @@
 import json
 from dotenv import load_dotenv
 from services.chat_service import ChatService
+from services.message_service import MessageService
 load_dotenv()
 
-temp_response_filename = 'temp-response.json'
-
-def updateTempResponseFile(content):
-    content = content.split("```json")[-1].strip("````").strip()
-    with open(temp_response_filename, "w") as file:
-        file.write(content)
-
-
 if __name__ == "__main__":
-    print("Main")
-    chat = ChatService()
+    chatService = ChatService()
+    messageService = MessageService()
 
     while True:
         message = input("Message: ")
@@ -21,6 +14,5 @@ if __name__ == "__main__":
         if message.lower() == "exit":
             break
 
-        response = chat.chat(message)
-        updateTempResponseFile(response)
-        print("Raw response", response)
+        response = chatService.chat(message)
+        messageService.handleMessage(response)
