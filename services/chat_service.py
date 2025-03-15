@@ -12,9 +12,6 @@ class ChatService:
 
     def setup(self):
         api_key = os.getenv(constants.GEMINI_API_KEY_NAME)
-        if not api_key:
-            print("Gemini API key not found!")
-            exit(1)
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel(constants.GEMINI_MODEL)
         messages = [{"role": "user", "parts": [get_system_prompt()]}]

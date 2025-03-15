@@ -12,7 +12,9 @@ def get_system_prompt():
         <message_format>
             - Your response must be a **valid JSON object with only one key output which is array of objects**.
             - Each step should be an object containing a `"command"` key with the exact CLI command.
-            - **No extra messages, no explanations, no markdown formatting (` ```json `)**.
+            - **No extra messages, no explanations
+            - Give the commands to create a professional project with some sample code
+            - It's your Job to identify which tech stack to chose if not specified by the user
         </message_format>
 
         <example>
