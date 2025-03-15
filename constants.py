@@ -1,3 +1,4 @@
 GEMINI_API_KEY_NAME="GEMINI_DEV_API_KEY"
 GEMINI_MODEL="gemini-2.0-flash"
 TEMP_RESPONSE_FILE_NAME="temp-response.json"
+ROOT_DIRECTORY="/home/afzal/Desktop/flow-cli-testing"

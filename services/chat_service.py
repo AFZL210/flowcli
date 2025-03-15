@@ -14,7 +14,7 @@ class ChatService:
         api_key = os.getenv(constants.GEMINI_API_KEY_NAME)
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel(constants.GEMINI_MODEL)
-        messages = [{"role": "user", "parts": [get_system_prompt()]}]
+        messages = [{"role": "user", "parts": [get_system_prompt(constants.ROOT_DIRECTORY)]}]
         chat_session = model.start_chat(history=messages)
 
         return messages, chat_session
