@@ -35,7 +35,7 @@ class MessageService:
 
             command_script = "\n".join([cmdObj["command"] for cmdObj in data["output"]])
 
-            script_path = "/tmp/execute_commands.sh"
+            script_path = constants.RESPONSE_SCRIPT_FILE_NAME
             with open(script_path, "w") as script_file:
                 script_file.write(f"#!/bin/bash\nsource ~/.nvm/nvm.sh\n{command_script}\nexec bash")
 

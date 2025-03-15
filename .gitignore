@@ -2,4 +2,4 @@
 .venv/
 *.idea/
 *__pycache__
-temp-response.json
+temp/
